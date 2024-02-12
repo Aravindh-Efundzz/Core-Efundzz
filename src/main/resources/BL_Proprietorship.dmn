@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0bqi3kk" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.12.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <decision id="BL_Proprietorship_Decisioning" name="Business Loan Proprietorship Decisioning">
+    <decisionTable id="DecisionTable_0iagj6z" hitPolicy="RULE ORDER">
+      <input id="InputClause_1fqargn" label="Credit Score" camunda:inputVariable="creditScore">
+        <inputExpression id="LiteralExpression_1ve2yh4" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="Input_1" label="Vintage" biodi:width="192" camunda:inputVariable="monthsInBusiness">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ujii0c" label="Age" biodi:width="192" camunda:inputVariable="age">
+        <inputExpression id="LiteralExpression_09uoeiu" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_07voazo" label="Tenure" biodi:width="192" camunda:inputVariable="loanTenure">
+        <inputExpression id="LiteralExpression_0xm6yt3" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1c09och" label="Loan Amount" camunda:inputVariable="loanAmount">
+        <inputExpression id="LiteralExpression_0cqv4ho" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1tfoqfm" label="Turnover" biodi:width="192" camunda:inputVariable="turnover">
+        <inputExpression id="LiteralExpression_10fvs95" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0id7uq5" label="Blacklisted Industry" camunda:inputVariable="businessIndustry">
+        <inputExpression id="LiteralExpression_0hiknik" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1fpx1rj" label="Profit" biodi:width="192" camunda:inputVariable="profitAfterTax">
+        <inputExpression id="LiteralExpression_1ilchc4" typeRef="double">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0j338dz" label="FOIR" camunda:inputVariable="foir">
+        <inputExpression id="LiteralExpression_07bvmdc" typeRef="double">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1q20dsf" label="DSCR" camunda:inputVariable="dscr">
+        <inputExpression id="LiteralExpression_10ehpbx" typeRef="double">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_17p8syf" label="DE Ratio" camunda:inputVariable="dtoeratio">
+        <inputExpression id="LiteralExpression_0lepsqy" typeRef="double">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Entity" name="entity" typeRef="string" biodi:width="192" />
+      <output id="OutputClause_0jbo5hw" name="entityGrade" typeRef="string" />
+      <rule id="DecisionRule_17dyvlj">
+        <inputEntry id="UnaryTests_09slohw">
+          <text>["A+", "A", "B", "C", "D"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h11duj">
+          <text>&gt;=36</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0voe1jm">
+          <text>[24..74]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04fassu">
+          <text>[12..96]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jcuoas">
+          <text>[300000..3500000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_066s5th">
+          <text>&gt;=5000000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1v8ml5b">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08jdxns">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00rp5ca">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lvhou2">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l131i2">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07v49q1">
+          <text>"BL_BAJAJ"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tv1h4s">
+          <text>"A"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0n5qql9">
+        <inputEntry id="UnaryTests_06f5w5b">
+          <text>["A+", "A", "B", "C"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ukvaqv">
+          <text>&gt;=36</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r3avd0">
+          <text>[25..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wipams">
+          <text>[12..48]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xzffp0">
+          <text>[100000..10000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0idik9g">
+          <text>&gt;=10000000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r80qgs">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fycqj4">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03g5fkl">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rlud1o">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vb0em1">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1oewzev">
+          <text>"BL_SCB"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1crk7el">
+          <text>"A"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0gwf7m5">
+        <inputEntry id="UnaryTests_0690khy">
+          <text>["A+", "A", "B", "C"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xnuwwk">
+          <text>&gt;=36</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k5mpns">
+          <text>[21..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gw1ab8">
+          <text>[12..48]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m261ky">
+          <text>[100000..10000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bwkoey">
+          <text>&gt;=2000000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qk5n58">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1eh5e6x">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g7yp3d">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0aj9zl3">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ux7s4n">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01hjact">
+          <text>"BL_IDFC FIRST BANK"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1o8cb9f">
+          <text>"A"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0v0asl0">
+        <inputEntry id="UnaryTests_0v8elcv">
+          <text>["A+", "A", "B", "C"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gi4aus">
+          <text>&gt;=36</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ch09hb">
+          <text>[24..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n0kebp">
+          <text>[12..36]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11py67q">
+          <text>[50000..5000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01v7pfw">
+          <text>&gt;=600000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ws40fc">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dkj2bc">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09mlwzo">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ck5pc6">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pd9gs8">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08jrwst">
+          <text>"BL_POONAWALA"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1f9vv0n">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_086c3ub">
+        <inputEntry id="UnaryTests_0j9u9h0">
+          <text>["A+", "A", "B", "C"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k5w225">
+          <text>&gt;=24</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l0vsu2">
+          <text>[21..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03y1mvz">
+          <text>[12..48]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eifwxu">
+          <text>[100000..3000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g0mo5u">
+          <text>&gt;=250000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x4kpf4">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1v67i97">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jmaex4">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03ree96">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sm7tkg">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0g12l5b">
+          <text>"BL_HDB FINANCIAL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0c1pz9b">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_09r3xvy">
+        <inputEntry id="UnaryTests_09ngx5g">
+          <text>["A+", "A", "B", "C", "D"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_094aq1h">
+          <text>&gt;=6</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mnco09">
+          <text>[22..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a6c0vh">
+          <text>[6..36]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vym98w">
+          <text>[50000..20000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k3gvwp">
+          <text>&gt;=350000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13qqd8t">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a6o18g">
+          <text>&gt;=1.5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xjueme">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hqou14">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15b69gf">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13herex">
+          <text>"BL_LENDIGKART"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1moddrj">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07xchmg">
+        <inputEntry id="UnaryTests_0788p00">
+          <text>["A+", "A", "B", "C", "D"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0od1joo">
+          <text>&gt;=24</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jbxe21">
+          <text>[23..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06x7o0p">
+          <text>[12..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17a0bx1">
+          <text>[100000..20000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1he44rj">
+          <text>&gt;=250000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bgivuv">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14k0jgd">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sama8c">
+          <text>&lt;=65</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_154ih8z">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vep9rf">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13htxct">
+          <text>"BL_CHOLA"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_13f6k55">
+          <text>"C"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1shrs1b">
+        <inputEntry id="UnaryTests_0vcq50w">
+          <text>["A+", "A", "B", "C", "D"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o2bbzv">
+          <text>&gt;=36</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qjspr0">
+          <text>[25..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pbwn4j">
+          <text>[12..36]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xue8cl">
+          <text>[100000..10000000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tqxrkk">
+          <text>&gt;=4000000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1471gmg">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c8g8q2">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lrsq66">
+          <text>&gt;=0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04l8cgm">
+          <text>&gt;=0.85</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uq2l10">
+          <text>&lt;=4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bmln4k">
+          <text>"BL_CREDIT SAISON"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0x4ppem">
+          <text>"C"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_037b7j6">
+        <inputEntry id="UnaryTests_0826b5b">
+          <text>["A+", "A", "B", "C"]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rkaxub">
+          <text>&gt;=24</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x9yf98">
+          <text>[20..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ngpf4w">
+          <text>[12..36]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1slchcx">
+          <text>[50000..500000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_120orc0">
+          <text>&gt;=250000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15mdpo3">
+          <text>not("Gems &amp; Jewellary","Insurance","Media and Entertainment","Banking/NBFC ","Oil and Gas","Real Estate","Mining")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v9ewmn">
+          <text>&gt;=1.25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_058zyzp">
+          <text>&lt;=60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14i632m">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13x2abi">
+          <text>&lt;=2.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04g630k">
+          <text>"BL_HERO FINCORP"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_139j88t">
+          <text>"C"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="BL_Proprietorship_Decisioning">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

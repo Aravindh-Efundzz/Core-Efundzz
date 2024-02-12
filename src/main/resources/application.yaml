@@ -1,0 +1,58 @@
+camunda:
+  bpm:
+    webapp:
+      index-redirect-enabled: true
+      context-path: /camunda
+      csrf:
+        cookie-name: XSRF-TOKEN
+    authorization:
+      enabled: true
+    admin-user:
+      id: efundzz
+      password: efundzz
+    history-level: full
+
+spring:
+  port: 8080
+  security:
+    ignored: "/swagger-ui.html/**"
+  application:
+    name: core-service
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/efundz
+#    username: postgres
+#    password: root
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+  cloud:
+    gcp:
+      security:
+        firebase:
+          enabled: false
+firebase:
+  credentials:
+    file: firebase_config.json
+app:
+  cors:
+    origins: "http://localhost:8080,http://localhost:3000,https://dev.efundz.in,https://www.dev.efundzz.com,https://www.dev.efundz.in,https://www.dev.efundzz.com,https://www.efundzz.com,https://roboloanz.com,https://www.roboloanz.com,https://dev.roboloanz.com"
+feign:
+  client:
+    config:
+      default:
+        defaultRequestHeaders:
+          username: prodefundz@fintelle.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+DOCUPLOAD_S3_PATH: efundzz-bucket/mvp

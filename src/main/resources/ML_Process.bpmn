@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1obn2eu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="MedicalLoan" name="Medical Loan" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Medical Loan Start">
+      <bpmn:outgoing>Flow_1ilno29</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1ilno29" sourceRef="StartEvent_1" targetRef="LoanDetails" />
+    <bpmn:userTask id="LoanDetails" name="Personal Info">
+      <bpmn:incoming>Flow_1ilno29</bpmn:incoming>
+      <bpmn:outgoing>Flow_11uh3b3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_11uh3b3" sourceRef="LoanDetails" targetRef="BasicAADHARVerification" />
+    <bpmn:userTask id="BasicAADHARVerification" name="KYC">
+      <bpmn:incoming>Flow_11uh3b3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0owbiyt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0owbiyt" sourceRef="BasicAADHARVerification" targetRef="FinancialDetails" />
+    <bpmn:userTask id="FinancialDetails" name="Other Details">
+      <bpmn:incoming>Flow_0owbiyt</bpmn:incoming>
+      <bpmn:outgoing>Flow_11rvlme</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_11rvlme" sourceRef="FinancialDetails" targetRef="CreditCheck" />
+    <bpmn:userTask id="CreditCheck" name="Credit Check">
+      <bpmn:incoming>Flow_11rvlme</bpmn:incoming>
+      <bpmn:outgoing>Flow_15yurv0</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_15yurv0" sourceRef="CreditCheck" targetRef="HospitalDetails" />
+    <bpmn:userTask id="HospitalDetails" name="Hospital Details">
+      <bpmn:incoming>Flow_15yurv0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0i4wztl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0i4wztl" sourceRef="HospitalDetails" targetRef="EmploymentDetails" />
+    <bpmn:userTask id="EmploymentDetails" name="Employment Details">
+      <bpmn:incoming>Flow_0i4wztl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1aofw8a</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1aofw8a" sourceRef="EmploymentDetails" targetRef="Documents" />
+    <bpmn:userTask id="Documents" name="Documents">
+      <bpmn:incoming>Flow_1aofw8a</bpmn:incoming>
+      <bpmn:outgoing>Flow_05m3w4s</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_05m3w4s" sourceRef="Documents" targetRef="ReviewDetails" />
+    <bpmn:userTask id="ReviewDetails" name="Review Details">
+      <bpmn:incoming>Flow_05m3w4s</bpmn:incoming>
+      <bpmn:outgoing>Flow_04cko6v</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_04cko6v" sourceRef="ReviewDetails" targetRef="ReviewOffers" />
+    <bpmn:userTask id="ReviewOffers" name="Review Offers">
+      <bpmn:incoming>Flow_04cko6v</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bc9oaz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0bc9oaz" sourceRef="ReviewOffers" targetRef="SendEmail" />
+    <bpmn:serviceTask id="SendEmail" name="Send Email" camunda:class="com.delegate.com.efundzz.SendEmail">
+      <bpmn:incoming>Flow_0bc9oaz</bpmn:incoming>
+      <bpmn:outgoing>Flow_190jvqc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0doayre" name="End">
+      <bpmn:incoming>Flow_190jvqc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_190jvqc" sourceRef="SendEmail" targetRef="Event_0doayre" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MedicalLoan">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="142" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ezc4rk_di" bpmnElement="LoanDetails">
+        <dc:Bounds x="280" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1diibn5_di" bpmnElement="BasicAADHARVerification">
+        <dc:Bounds x="440" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0286dol_di" bpmnElement="FinancialDetails">
+        <dc:Bounds x="600" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yifunf_di" bpmnElement="CreditCheck">
+        <dc:Bounds x="760" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1yx5jve_di" bpmnElement="HospitalDetails">
+        <dc:Bounds x="920" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14efgi1_di" bpmnElement="EmploymentDetails">
+        <dc:Bounds x="1080" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0az84mc_di" bpmnElement="Documents">
+        <dc:Bounds x="1240" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fl25x9_di" bpmnElement="ReviewDetails">
+        <dc:Bounds x="1400" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ocpzc0_di" bpmnElement="ReviewOffers">
+        <dc:Bounds x="1560" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kt1o28_di" bpmnElement="SendEmail">
+        <dc:Bounds x="1720" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0doayre_di" bpmnElement="Event_0doayre">
+        <dc:Bounds x="1882" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1890" y="142" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ilno29_di" bpmnElement="Flow_1ilno29">
+        <di:waypoint x="208" y="117" />
+        <di:waypoint x="280" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11uh3b3_di" bpmnElement="Flow_11uh3b3">
+        <di:waypoint x="380" y="117" />
+        <di:waypoint x="440" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0owbiyt_di" bpmnElement="Flow_0owbiyt">
+        <di:waypoint x="540" y="117" />
+        <di:waypoint x="600" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11rvlme_di" bpmnElement="Flow_11rvlme">
+        <di:waypoint x="700" y="117" />
+        <di:waypoint x="760" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15yurv0_di" bpmnElement="Flow_15yurv0">
+        <di:waypoint x="860" y="117" />
+        <di:waypoint x="920" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i4wztl_di" bpmnElement="Flow_0i4wztl">
+        <di:waypoint x="1020" y="117" />
+        <di:waypoint x="1080" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1aofw8a_di" bpmnElement="Flow_1aofw8a">
+        <di:waypoint x="1180" y="117" />
+        <di:waypoint x="1240" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05m3w4s_di" bpmnElement="Flow_05m3w4s">
+        <di:waypoint x="1340" y="117" />
+        <di:waypoint x="1400" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04cko6v_di" bpmnElement="Flow_04cko6v">
+        <di:waypoint x="1500" y="117" />
+        <di:waypoint x="1560" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bc9oaz_di" bpmnElement="Flow_0bc9oaz">
+        <di:waypoint x="1660" y="117" />
+        <di:waypoint x="1720" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_190jvqc_di" bpmnElement="Flow_190jvqc">
+        <di:waypoint x="1820" y="117" />
+        <di:waypoint x="1882" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

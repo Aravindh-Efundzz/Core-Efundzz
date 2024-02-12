@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_08h4z6w" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="PersonalLoan" name="Personal Loan" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ed8a65</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ed8a65" sourceRef="StartEvent_1" targetRef="PanAadharCreditVerification" />
+    <bpmn:sequenceFlow id="Flow_19u69ja" sourceRef="PanAadharCreditVerification" targetRef="NewLoanDetails" />
+    <bpmn:sequenceFlow id="Flow_0v63sx2" sourceRef="NewLoanDetails" targetRef="ResidentialProfessionalDetails" />
+    <bpmn:sequenceFlow id="Flow_1xmefmo" sourceRef="ResidentialProfessionalDetails" targetRef="NewDocuments" />
+    <bpmn:userTask id="PanAadharCreditVerification" name="KYC Details">
+      <bpmn:incoming>Flow_0ed8a65</bpmn:incoming>
+      <bpmn:outgoing>Flow_19u69ja</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="NewLoanDetails" name="Loan and Contact Details">
+      <bpmn:incoming>Flow_19u69ja</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v63sx2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="ResidentialProfessionalDetails" name="Personal Details">
+      <bpmn:incoming>Flow_0v63sx2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xmefmo</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="NewDocuments" name="Upload Documents">
+      <bpmn:incoming>Flow_1xmefmo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n6cmrz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1n6cmrz" sourceRef="NewDocuments" targetRef="ReviewDetails" />
+    <bpmn:userTask id="ReviewDetails" name="Review Details">
+      <bpmn:incoming>Flow_1n6cmrz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rk7fev</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1rk7fev" sourceRef="ReviewDetails" targetRef="PL_PreProcess" />
+    <bpmn:serviceTask id="PL_PreProcess" name="BRE Calculated Variables" camunda:class="com.efundzz.delegate.PL_PreProcess">
+      <bpmn:incoming>Flow_1rk7fev</bpmn:incoming>
+      <bpmn:outgoing>Flow_1441uqw</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1441uqw" sourceRef="PL_PreProcess" targetRef="PersonalLoanConfirmation" />
+    <bpmn:businessRuleTask id="PersonalLoanConfirmation" name="Confirmation" camunda:resultVariable="offers" camunda:decisionRef="PLBRE_Decisioning">
+      <bpmn:incoming>Flow_1441uqw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lywyvk</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_1lywyvk" sourceRef="PersonalLoanConfirmation" targetRef="ReviewOffers" />
+    <bpmn:userTask id="ReviewOffers" name="Review Offers">
+      <bpmn:incoming>Flow_1lywyvk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1itowmw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1itowmw" sourceRef="ReviewOffers" targetRef="SendEmail" />
+    <bpmn:serviceTask id="SendEmail" name="Send Email" camunda:class="com.efundzz.delegate.SendEmail">
+      <bpmn:incoming>Flow_1itowmw</bpmn:incoming>
+      <bpmn:outgoing>Flow_06k0w7q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1jmhzaj">
+      <bpmn:incoming>Flow_06k0w7q</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_06k0w7q" sourceRef="SendEmail" targetRef="Event_1jmhzaj" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PersonalLoan">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="193" y="142" width="8" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15fvsjt_di" bpmnElement="PanAadharCreditVerification">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jxvu37_di" bpmnElement="NewLoanDetails">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h2a80n_di" bpmnElement="ResidentialProfessionalDetails">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jpyvtw_di" bpmnElement="NewDocuments">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0coshwv_di" bpmnElement="ReviewDetails">
+        <dc:Bounds x="910" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jarb35_di" bpmnElement="PL_PreProcess">
+        <dc:Bounds x="1070" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tfohi6_di" bpmnElement="PersonalLoanConfirmation">
+        <dc:Bounds x="1230" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xgrjlr_di" bpmnElement="ReviewOffers">
+        <dc:Bounds x="1390" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vtqhvo_di" bpmnElement="SendEmail">
+        <dc:Bounds x="1550" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jmhzaj_di" bpmnElement="Event_1jmhzaj">
+        <dc:Bounds x="1712" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ed8a65_di" bpmnElement="Flow_0ed8a65">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19u69ja_di" bpmnElement="Flow_19u69ja">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v63sx2_di" bpmnElement="Flow_0v63sx2">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xmefmo_di" bpmnElement="Flow_1xmefmo">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n6cmrz_di" bpmnElement="Flow_1n6cmrz">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="910" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rk7fev_di" bpmnElement="Flow_1rk7fev">
+        <di:waypoint x="1010" y="117" />
+        <di:waypoint x="1070" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1441uqw_di" bpmnElement="Flow_1441uqw">
+        <di:waypoint x="1170" y="117" />
+        <di:waypoint x="1230" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lywyvk_di" bpmnElement="Flow_1lywyvk">
+        <di:waypoint x="1330" y="118" />
+        <di:waypoint x="1390" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1itowmw_di" bpmnElement="Flow_1itowmw">
+        <di:waypoint x="1490" y="118" />
+        <di:waypoint x="1550" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06k0w7q_di" bpmnElement="Flow_06k0w7q">
+        <di:waypoint x="1650" y="117" />
+        <di:waypoint x="1712" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

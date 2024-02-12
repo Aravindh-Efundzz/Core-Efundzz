@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gybgjh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="LoanAgainstProperty" name="Loan Against Property" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start Loan Against Property">
+      <bpmn:outgoing>Flow_01g679u</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_01g679u" sourceRef="StartEvent_1" targetRef="LoanDetails" />
+    <bpmn:sequenceFlow id="Flow_0nh4was" sourceRef="LoanDetails" targetRef="BasicAADHARVerification" />
+    <bpmn:sequenceFlow id="Flow_1xpn94x" sourceRef="BasicAADHARVerification" targetRef="FinancialDetails" />
+    <bpmn:sequenceFlow id="Flow_1sq7uag" sourceRef="FinancialDetails" targetRef="CreditCheck" />
+    <bpmn:sequenceFlow id="Flow_1xvocp8" sourceRef="CreditCheck" targetRef="PropertyDetails" />
+    <bpmn:sequenceFlow id="Flow_0633b0h" sourceRef="PropertyDetails" targetRef="EmploymentDetails" />
+    <bpmn:sequenceFlow id="Flow_1nhpbqd" sourceRef="EmploymentDetails" targetRef="Documents" />
+    <bpmn:sequenceFlow id="Flow_0xj7v21" sourceRef="Documents" targetRef="ReviewDetails" />
+    <bpmn:sequenceFlow id="Flow_032q31n" sourceRef="ReviewDetails" targetRef="ReviewOffers" />
+    <bpmn:sequenceFlow id="Flow_0jq1wyl" sourceRef="ReviewOffers" targetRef="SendEmail" />
+    <bpmn:endEvent id="Event_1euoc8i" name="End">
+      <bpmn:incoming>Flow_10qevyh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_10qevyh" sourceRef="SendEmail" targetRef="Event_1euoc8i" />
+    <bpmn:userTask id="BasicAADHARVerification" name="KYC">
+      <bpmn:incoming>Flow_0nh4was</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xpn94x</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="LoanDetails" name="Personal Information">
+      <bpmn:incoming>Flow_01g679u</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nh4was</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="FinancialDetails" name="Other Details">
+      <bpmn:incoming>Flow_1xpn94x</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sq7uag</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="CreditCheck" name="Credit Check">
+      <bpmn:incoming>Flow_1sq7uag</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xvocp8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="EmploymentDetails" name="Employment Details">
+      <bpmn:incoming>Flow_0633b0h</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nhpbqd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Documents" name="Upload Documents">
+      <bpmn:incoming>Flow_1nhpbqd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xj7v21</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="ReviewDetails" name="Review Details">
+      <bpmn:incoming>Flow_0xj7v21</bpmn:incoming>
+      <bpmn:outgoing>Flow_032q31n</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="ReviewOffers" name="Review Offers">
+      <bpmn:incoming>Flow_032q31n</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jq1wyl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="SendEmail" name="Send Email" camunda:class="com.delegate.com.efundzz.SendEmail">
+      <bpmn:incoming>Flow_0jq1wyl</bpmn:incoming>
+      <bpmn:outgoing>Flow_10qevyh</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="PropertyDetails" name="Property Details">
+      <bpmn:incoming>Flow_1xvocp8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0633b0h</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="LoanAgainstProperty">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="142" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1euoc8i_di" bpmnElement="Event_1euoc8i">
+        <dc:Bounds x="1872" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1880" y="142" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1i54j0t_di" bpmnElement="BasicAADHARVerification">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zpcjwr_di" bpmnElement="LoanDetails">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nkulmw_di" bpmnElement="FinancialDetails">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vtxopw_di" bpmnElement="CreditCheck">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ltpe69_di" bpmnElement="EmploymentDetails">
+        <dc:Bounds x="1070" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01w95xa_di" bpmnElement="Documents">
+        <dc:Bounds x="1230" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ioons4_di" bpmnElement="ReviewDetails">
+        <dc:Bounds x="1390" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p0vx3v_di" bpmnElement="ReviewOffers">
+        <dc:Bounds x="1550" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1lwcgjb_di" bpmnElement="SendEmail">
+        <dc:Bounds x="1710" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_185oysz_di" bpmnElement="PropertyDetails">
+        <dc:Bounds x="910" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_01g679u_di" bpmnElement="Flow_01g679u">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nh4was_di" bpmnElement="Flow_0nh4was">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xpn94x_di" bpmnElement="Flow_1xpn94x">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sq7uag_di" bpmnElement="Flow_1sq7uag">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xvocp8_di" bpmnElement="Flow_1xvocp8">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="910" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0633b0h_di" bpmnElement="Flow_0633b0h">
+        <di:waypoint x="1010" y="117" />
+        <di:waypoint x="1070" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nhpbqd_di" bpmnElement="Flow_1nhpbqd">
+        <di:waypoint x="1170" y="117" />
+        <di:waypoint x="1230" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xj7v21_di" bpmnElement="Flow_0xj7v21">
+        <di:waypoint x="1330" y="117" />
+        <di:waypoint x="1390" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_032q31n_di" bpmnElement="Flow_032q31n">
+        <di:waypoint x="1490" y="117" />
+        <di:waypoint x="1550" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jq1wyl_di" bpmnElement="Flow_0jq1wyl">
+        <di:waypoint x="1650" y="117" />
+        <di:waypoint x="1710" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10qevyh_di" bpmnElement="Flow_10qevyh">
+        <di:waypoint x="1810" y="117" />
+        <di:waypoint x="1872" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
