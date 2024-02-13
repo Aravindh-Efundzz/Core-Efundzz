@@ -4,16 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "reference_data")
 @Data
-//@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reference {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String refKey1;
